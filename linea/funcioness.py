@@ -1,7 +1,7 @@
 # archivo para todas las funciones necesarias para la aplicación "línea"
 
 # cálculo de coordenadas de líneas
-def calcular_y(x, m , b):
+def calcular_y(x:float, m:float , b:float)->float:
     '''
     Calcula el valor de y en una línea recta
     x: valor de x
@@ -12,11 +12,11 @@ def calcular_y(x, m , b):
     return (m*x)+b
 
 def test_linea():
-    y=calcular_y(0,2,3)
+    y=calcular_y(0.0,2.0,3.0)
     return y
 
 if __name__=='__main__':
-    if test_linea()==3:
+    if test_linea()==3.0:
         print('Test exitoso')
     else:
         print('Test fallido')
