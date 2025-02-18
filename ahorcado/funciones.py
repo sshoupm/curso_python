@@ -69,6 +69,7 @@ def adivina_letra(abc:dict, palabra:str, letras_adivinadas:set, turnos:int):
                 letras_adivinadas.add(letra)
             else:
                 turnos -= 1
+    return turnos
 
 if __name__=='__main__':
     plantillas = carga_plantillas('plantilla')
@@ -81,5 +82,6 @@ if __name__=='__main__':
     abcdario = {letra:letra for letra in string.ascii_lowercase}
     adivinadas = set()
     t = 5 # oportunidades
-    adivina_letra(abcdario, p, adivinadas, t)
-    adivina_letra(abcdario, p, adivinadas, t)
+    t=adivina_letra(abcdario, p, adivinadas, t)
+    t=adivina_letra(abcdario, p, adivinadas, t)
+    print(t)
