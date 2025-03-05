@@ -6,9 +6,9 @@ app = Flask(__name__)
 def index():
     return '''<html>
                 <head>
-                    <title>HELLO WORLD</title>
+                    <title>Hello World</title>
                 </head>
-                <body><h1>Hello World</h1>
+                <body><h1>Hola mundo</h1>
                 <p>Ir a la página de <a href="/about">Acerca de</a></p>
                 </body>
             </html>'''
