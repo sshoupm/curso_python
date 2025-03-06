@@ -19,12 +19,25 @@ def busca_en_titulo(diccionario,palabra)->list:
             lista.append(libro)
     return lista    
 
+def crea_diccionario(lista:list, llave:str)->dict:
+     '''Crea un diccionario con los títulos de los libros como clave y el resto de los datos como valores'''
+     return {x[llave]:x for x in lista}
+
+def busca_en_diccionario(diccionario,palabra)->list:
+    '''Busca palabra en título de la lista de diccionarios'''
+    lista=[]
+    palabra=palabra.lower()
+    for llave, libro in diccionario.items():
+        if palabra in llave.lower():
+            lista.append(libro)
+    return lista
+
 if __name__ == "__main__":
     archivo_csv='booklist2000.csv'
-    #print(archivo_csv)
     lista_libros=lee_archivo_csv(archivo_csv)
     diccionario_libros=crea_diccionario_titulos(lista_libros)
-    #print(diccionario_libros)
-    print(lista_libros)
-    lista_resultados=busca_en_titulo(diccionario_libros,'rebels')
-    print(lista_resultados)
+    resultado=busca_en_diccionario(diccionario_libros,'rebels')
+    print(resultado)
+    diccionario_autores=crea_diccionario(lista_libros,'author')
+    resultado=busca_en_diccionario(diccionario_autores,'Rowling')
+    print(resultado)
