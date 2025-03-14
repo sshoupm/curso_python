@@ -32,6 +32,11 @@ def busca_en_diccionario(diccionario,palabra)->list:
             lista.append(libro)
     return lista
 
+
+def libros_empiezan_con(lista:str, letra:str)->list:
+    '''Devuelve una lista con los libros cuyo título empieza con letra'''
+    return [x for x in lista if x['title'].lower().startswith(letra.lower())]
+
 if __name__ == "__main__":
     archivo_csv='booklist2000.csv'
     lista_libros=lee_archivo_csv(archivo_csv)
@@ -40,4 +45,5 @@ if __name__ == "__main__":
     print(resultado)
     diccionario_autores=crea_diccionario(lista_libros,'author')
     resultado=busca_en_diccionario(diccionario_autores,'Rowling')
+    resultado=libros_empiezan_con(lista_libros,'a')
     print(resultado)
