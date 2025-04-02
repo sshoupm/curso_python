@@ -132,6 +132,41 @@ class SistemaCine:
         '''Devuelve una lista con los actores que han participado en una película'''
         ids_actores = [rel.id_estrella for rel in self.relacion.values() if rel.id_pelicula == id_pelicula]
         return [self.actores[id_estrella] for id_estrella in ids_actores]
+    
+    def obtener_personajes_por_actor(self, id_estrella):
+        'Devuelve una lista con los personajes que ha interpretado un actor'
+        nombre_personaje = [rel.personaje for rel in self.relacion.values() if rel.id_estrella == id_estrella]
+        return nombre_personaje
+
+    
+    
+    def obtener_peliculas_y_personajes_por_actor(self, id_estrella):
+        '''Devuelve una lista de diccionarios con las películas y los personajes que interpretó un actor'''
+        return [
+        {
+            'id_pelicula': self.peliculas[rel.id_pelicula].id_pelicula,
+            'titulo_pelicula': self.peliculas[rel.id_pelicula].titulo_pelicula,
+            'fecha_lanzamiento': self.peliculas[rel.id_pelicula].fecha_lanzamiento,
+            'url_poster': self.peliculas[rel.id_pelicula].url_poster,
+            'personaje': rel.personaje
+        }
+        for rel in self.relacion.values() if rel.id_estrella == id_estrella
+        ]
+    
+    def obtener_actores_y_personajes_por_pelicula(self, id_pelicula):
+        '''Devuelve una lista de diccionarios con los actores y los personajes que interpretaron en una película'''
+        return [
+        {
+            'id_estrella': self.actores[rel.id_estrella].id_estrella,
+            'nombre': self.actores[rel.id_estrella].nombre,
+            'fecha_nacimiento': self.actores[rel.id_estrella].fecha_nacimiento,
+            'ciudad_nacimiento': self.actores[rel.id_estrella].ciudad_nacimiento,
+            'url_imagen': self.actores[rel.id_estrella].url_imagen,
+            'personaje': rel.personaje
+        }
+        for rel in self.relacion.values() if rel.id_pelicula == id_pelicula
+        ]
+
     def login(self, username, password):
         '''Inicia sesión en el sistema'''
         if username in self.usuarios:
@@ -164,6 +199,28 @@ class SistemaCine:
         if self.usuario_actual:
             user = Users(username, nombre_completo, email, password)
             self.usuarios[user.username] = user
+
+    #función del profe
+    def obtener_personajes_por_estrella(self, id_estrella):
+        personajes_actores = []
+        for rel in self.relacion.values():
+            if rel.id_estrella == id_estrella:
+                pelicula = self.peliculas.get(rel.id_pelicula)
+                if pelicula:
+                    personajes_actores.append({"personaje": rel.personaje, "pelicula": pelicula})
+        return personajes_actores
+    
+    def obtener_personajes_por_pelicula(self, id_pelicula):
+        personajes_peliculas = []
+        for rel in self.relacion.values():
+            if rel.id_pelicula == id_pelicula:
+                actor = self.actores.get(rel.id_estrella)
+                if actor:
+                    personajes_peliculas.append({"personaje": rel.personaje, "actor": actor})
+        return personajes_peliculas
+
+    
+
 if __name__ == '__main__':
     #archivo = "datos/movies_db - actores.csv"
     archivo_actores   = "datos\movies_db - actores.csv"
@@ -184,12 +241,20 @@ if __name__ == '__main__':
     lista_actores = sistema.obtener_actores_por_pelicula(1)
     for actor in lista_actores:
         print(actor.nombre)
+    
+    lista_personajes = sistema.obtener_personajes_por_actor(1)
+    for personaje in lista_personajes:
+        print(personaje)
+    
+
+
     '''
     for u in sistema.usuarios.values():
         u.password = u.hash_string(u.password)
     hashed_users = 'datos/movies_db - users_hashed.csv'
     sistema.guardar_csv(hashed_users, sistema.usuarios)
     print(f'Se escribió el archivo {hashed_users}')
+    '''
     '''
     u = sistema.usuarios['sshoup']
     print(type(u))
@@ -209,3 +274,4 @@ if __name__ == '__main__':
     else:
         print('Usuario o contraseña incorrectos')
     print('Fin del programa')
+    '''

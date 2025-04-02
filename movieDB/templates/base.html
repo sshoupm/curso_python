@@ -8,8 +8,8 @@
     <title>{% block title %}{% endblock %}</title>
     {% endblock %}
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<body style="background-color: #fff7f7;">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ffd9e9; color: #302329">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">Movie Database</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@
     </nav>
     {% block body %}
     {% endblock %}
-    <footer class="bg-dark text-white text-center py-3 mt-5">
+    <footer class="navbar-light text-center py-3 mt-5" style="background-color: #ffd9e9; color: #302329">
         <div class="container">
             <p class="mb-0">© 2025 Movie Database. Todos los derechos reservados.</p>
         </div>
