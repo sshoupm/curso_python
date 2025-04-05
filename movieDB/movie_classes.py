@@ -45,7 +45,7 @@ class Pelicula:
         return f"{self.titulo_pelicula} ({self.fecha_lanzamiento.year})"
 class Relacion:
     ''' Clase para manejar las relaciones entre peliculas y actores'''
-    def __init__(self, id_relacion, id_estrella, id_pelicula, personaje):
+    def __init__(self, id_relacion, id_pelicula, id_estrella, personaje):
         ''' Inicializa la clase con los datos de la relación'''
         self.id_relacion = int(id_relacion)
         self.id_estrella = int(id_estrella)
@@ -265,7 +265,7 @@ if __name__ == '__main__':
     print(exito)
     if (exito):
         print(sistema.usuario_actual.username)
-        sistema.agregar_pelicula('La vida es bella', '1997-12-20', 'https://www.imdb.com/title/tt0118799/mediaviewer/rm4282021376')
+
         sistema.agregar_relacion(69,36,'Rita')
         sistema.agregar_usuario('messi', 'Lionel Messi', 'messi@gmail.com', '12345')
         sistema.guardar_csv(archivo_peliculas, sistema.peliculas)
